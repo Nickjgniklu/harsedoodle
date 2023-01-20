@@ -1,6 +1,6 @@
-import Player from "./player.js";
-import ResourceLoader from "./ResourceLoader.js";
-import XY from "./XY.js";
+import Player from "./player";
+import ResourceLoader from "./ResourceLoader";
+import XY from "./XY";
 class GameModel {
     ResourceLoader:ResourceLoader
     Start:number;
@@ -72,7 +72,6 @@ class GameModel {
         
 
         this.PrepTiles();
-
 
         let playerImg =this.ResourceLoader.Images.get("player.png");
         if(playerImg){

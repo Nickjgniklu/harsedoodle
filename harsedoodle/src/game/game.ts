@@ -13,7 +13,7 @@ import React from "react"
 //import Queue from "../queue.js";
 //import Missle from "./missle.js";
 //import Asteroid from "./asteroid.js";
-import Player from "./player.js";
+import Player from "./player";
 import { Persistence } from "./persistance";
 import GameModel from "./GameModel";
 const e = React.createElement;
@@ -249,17 +249,17 @@ class Game extends React.Component {
 
     }
     updateSelf(elapsedTime:number) {
-        if (this.Keyboard.CommandBuffer.get("thrust")) {
+        if (this.Keyboard.CommandBuffer.get("jump")) {
             //console.log("trust");
-            this.GameModel.Self.Thrust(elapsedTime);
+            this.GameModel.Self.Jump(elapsedTime);
         }
-        if (this.Keyboard.CommandBuffer.get("rotatel")) {
+        if (this.Keyboard.CommandBuffer.get("left")) {
 
-            this.GameModel.Self.RotateLeft(elapsedTime);
+            this.GameModel.Self.StrafeLeft(elapsedTime);
         }
-        if (this.Keyboard.CommandBuffer.get("rotater")) {
+        if (this.Keyboard.CommandBuffer.get("right")) {
             
-            this.GameModel.Self.RotateRight(elapsedTime);
+            this.GameModel.Self.StrafeRight(elapsedTime);
         }
         if (this.Keyboard.CommandBuffer.get("fire")) {
 
@@ -281,7 +281,7 @@ class Game extends React.Component {
             this.GameModel.Self.Y = limits.bottom;
         }
         this.updateWindow();
-        this.GameModel.Self.Update(elapsedTime, []);
+        this.GameModel.Self.Update(elapsedTime);
 
     }
     updateWindow() {
@@ -381,7 +381,7 @@ class Game extends React.Component {
         
         this.LastFrameTime = 0;
         //this.Counting = false;
-        console.log("restart")
+        console.log("starting")
         
         let serverModel={};
         
@@ -402,6 +402,9 @@ class Game extends React.Component {
         //this.Mouse.ClickFunctions.push(this.handleClick.bind(this))
         requestAnimationFrame(this.gameLoop.bind(this));
 
+    }
+    componentDidMount() {
+        this.initialize();
     }
 
 }

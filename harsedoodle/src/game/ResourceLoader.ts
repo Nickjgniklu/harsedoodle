@@ -35,12 +35,11 @@ class ResourceLoader{
     // }
     LoadAllImages(){
         let raw=this.importAll(require.context("../images",false,/\.(png|jpe?g|svg)$/));
-        console.log(raw)
-        let keys=Object.keys(raw); 
-        console.log(keys);
+        let keys=Array.from(raw.keys())
         for(let i =0;i<keys.length;i++)
          {
-             let img:LoadableImage=new Image();
+             let img:LoadableImage= new Image()
+             img.src= raw.get(keys[i]);
              img.isReady = false;
             img.onload = function () {
              (this as LoadableImage).isReady = true;

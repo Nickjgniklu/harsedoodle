@@ -6,7 +6,7 @@
 export class ControlMap {
     left = "ArrowLeft"
     right = "ArrowRight"
-    jump = "Space"
+    jump = " "
 }
 export class Persistence {
     private prefix = "Nykloo.";
