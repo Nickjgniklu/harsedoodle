@@ -2,6 +2,7 @@
 import { LoadableImage } from "./ResourceLoader";
 import GameModel from "./GameModel"
 import GameObject from "./GameObject"
+import Platform from "./Platform";
 class Player implements GameObject{
     Speed=.4;
     JumpSpeed=.90;
@@ -53,7 +54,12 @@ class Player implements GameObject{
         this.VelocityX += Math.sin(this.Rotation) * this.Speed * elapsedTime;
     }
     Jump(elapsedTime:number){
+        let limits = this.GameModel.getWorldLimits();
+
+        if(this.Collided(this.GameModel.Platforms)||this.GameModel.Self.Y >= limits.bottom){
         this.VelocityY = -this.JumpSpeed
+        }
+
     }
     StrafeRight(elapsedTime:number){
         this.X += this.Speed*elapsedTime;
@@ -69,9 +75,8 @@ class Player implements GameObject{
     RotateLeft(elapsedTime:number){
         this.Rotation -= this.RotationRate * elapsedTime;
     }
-
+    Jumped=false
     Update(elapsedTime:number){
-        console.log(this.VelocityY)
         this.Y += this.VelocityY * elapsedTime;
         this.X += this.VelocityX * elapsedTime;
         this.VelocityY += this.Gravity * elapsedTime
@@ -86,7 +91,7 @@ class Player implements GameObject{
         // }
         
     }
-    Collided(colidables:[]){
+    Collided(colidables:GameObject[]){
         for(let i in colidables){
             if(this.GameModel.objectsCollided(this,colidables[i])){
                 return true;

@@ -1,3 +1,5 @@
+import GameObject from "./GameObject";
+import Platform from "./Platform";
 import Player from "./player";
 import ResourceLoader from "./ResourceLoader";
 import XY from "./XY";
@@ -26,6 +28,9 @@ class GameModel {
     ASTEROID_DEFAULT_SIZE = 200;
     ASTEROID_START_COUNT = 100;
     Asteroids = {};
+
+    Platform_START_COUNT = 100;
+    Platforms:Platform[]=[]
 
     UFO_DEFAULT_SIZE = 400;
     UFO_START_COUNT = 5;
@@ -81,6 +86,10 @@ class GameModel {
         this.Self =new Player(100,new Image(),this.WORLDSIZE,this,this.WORLDSIZE/2,100);
 
         }
+        for(let i =0;i<this.Platform_START_COUNT;i++){
+            this.Platforms.push(new Platform(750*i,750*i,this))
+        }
+        
     }
 
 
@@ -146,7 +155,7 @@ class GameModel {
         return Math.sqrt(xs + ys);
 
     }
-    objectsCollided(obj1:XY, obj2:XY) {
+    objectsCollided(obj1:GameObject, obj2:GameObject) {
         let boundary = obj1.Size / 2 + obj2.Size / 2;
         let dist = this.distanceBetweenObjects(obj1, obj2);
         if (dist <= boundary) {

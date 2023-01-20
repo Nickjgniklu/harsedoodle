@@ -172,9 +172,9 @@ class Game extends React.Component {
         this.context?.clearRect(0, 0, this.canvas?.width??0, this.canvas?.height??0);
         this.renderBackground(context);
         this.GameModel.Self.Render(context);
-        // for (let i in this.GameModel.Asteroids) {
-        //     this.GameModel.Asteroids[i].Render(this.context);
-        // }
+         for (let i in this.GameModel.Platforms) {
+             this.GameModel.Platforms[i].Render(context);
+         }
         this.renderScores(context);
     }
         //this.ExplosiveParticleSystem.render()
