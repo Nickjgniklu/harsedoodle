@@ -1,6 +1,6 @@
 import Keyboard from './keyboard'
 //import GameModel from "./gamemodel.js";
-import ResourceLoader, { LoadableImage } from './ResourceLoader'
+import ResourceLoader, { LoadableImage } from './resource-loader'
 //import HighScores from "./highscores.js";
 //import ControlSetup from "./controlsetup.js";
 import React from 'react'
@@ -15,7 +15,7 @@ import React from 'react'
 //import Asteroid from "./asteroid.js";
 import Player from './player'
 import { Persistence } from './persistance'
-import GameModel from './GameModel'
+import GameModel from './game-model'
 const e = React.createElement
 class Game extends React.Component {
   canvas: HTMLCanvasElement | null = null
@@ -202,10 +202,17 @@ class Game extends React.Component {
 
   renderScores(context: CanvasRenderingContext2D) {
     let players = this.GameModel.OtherPlayers
-    context.font = '50px Arial'
+    context.font = '70px Arial'
     let loc = 50
-    context.fillStyle = '#00FF00'
+    context.fillStyle = '#ff99ff'
+    if(this.GameModel.Self.Score>=20){
+    context.font = '100px Arial'
+
+        context.fillText('Winner!!!!!!', 30, loc+40)
+
+    }else{
     context.fillText(`score ` + this.GameModel.Self.Score, 30, loc)
+    }
     context.fillStyle = '#0000FF'
   }
   renderGame() {

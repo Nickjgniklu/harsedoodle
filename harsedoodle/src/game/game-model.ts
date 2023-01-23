@@ -1,7 +1,7 @@
-import GameObject from './GameObject'
-import Platform from './Platform'
+import GameObject from './game-object'
+import Platform from './platform'
 import Player from './player'
-import ResourceLoader from './ResourceLoader'
+import ResourceLoader from './resource-loader'
 import Random from './random'
 class GameModel {
   ResourceLoader: ResourceLoader
@@ -48,7 +48,7 @@ class GameModel {
   OtherPlayers = []
   createRandomPlatforms() {
     for (let i = 0; i < this.Platform_START_COUNT; i++) {
-      let x = Random.nextRange(0, this.WORLDSIZE)
+      let x = Random.nextRange(1000, this.WORLDSIZE)
       let y = Random.nextRange(0, this.WORLDSIZE)
       this.Platforms.push(new Platform(x, y, this))
     }
@@ -86,8 +86,8 @@ class GameModel {
         playerImg,
         this.WORLDSIZE,
         this,
-        this.WORLDSIZE / 2,
-        this.WORLDSIZE - 10
+        50,
+        this.WORLDSIZE - 20
       )
     } else {
       console.log('uh oh player sprite not loaded')

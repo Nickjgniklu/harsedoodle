@@ -1,5 +1,5 @@
-import GameObject from './GameObject'
-import GameModel from './GameModel'
+import GameObject from './game-object'
+import GameModel from './game-model'
 import { render } from '@testing-library/react'
 
 export default class Platform implements GameObject {

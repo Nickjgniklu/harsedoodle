@@ -1,8 +1,8 @@
 //import Random from "./random.js";
-import { LoadableImage } from './ResourceLoader'
-import GameModel from './GameModel'
-import GameObject from './GameObject'
-import Platform from './Platform'
+import { LoadableImage } from './resource-loader'
+import GameModel from './game-model'
+import GameObject from './game-object'
+import Platform from './platform'
 class Player implements GameObject {
   Speed = 0.4
   JumpSpeed = 0.9
