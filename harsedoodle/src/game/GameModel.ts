@@ -13,11 +13,11 @@ class GameModel {
     Self:Player;
     Score = 0;
     Paused = false;
-    WORLDSIZE = 10240;
+    WORLDSIZE = 10240*2;
     VIEWPORTSIZE = 2048;
     PLAYAREASIZE = 1300;
-    XTILECOUNT = 20;
-    YTILECOUNT = 20;
+    XTILECOUNT = 40;
+    YTILECOUNT = 40;
     TILEWIDTH = 193;
     // TILEWIDTH=this.WORLDSIZE/this.VIEWPORTSIZE;
     ViewPortCenter = { x: this.WORLDSIZE / 2, y: this.WORLDSIZE / 2 }
@@ -29,7 +29,7 @@ class GameModel {
     ASTEROID_START_COUNT = 100;
     Asteroids = {};
 
-    Platform_START_COUNT = 100;
+    Platform_START_COUNT = 700;
     Platforms:Platform[]=[]
 
     UFO_DEFAULT_SIZE = 400;
@@ -86,7 +86,7 @@ class GameModel {
 
         let playerImg =this.ResourceLoader.Images.get("player.png");
         if(playerImg){
-        this.Self =new Player(100,playerImg,this.WORLDSIZE,this,this.WORLDSIZE/2,100);
+        this.Self =new Player(100,playerImg,this.WORLDSIZE,this,this.WORLDSIZE/2,this.WORLDSIZE- 10);
         }else{
             console.log("uh oh player sprite not loaded")
         this.Self =new Player(100,new Image(),this.WORLDSIZE,this,this.WORLDSIZE/2,100);

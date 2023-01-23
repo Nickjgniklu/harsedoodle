@@ -93,6 +93,10 @@ class Player implements GameObject {
         //     this.State="EXPLODING";
         //     this.Score-=100;
         // }
+        let height=this.GameModel.WORLDSIZE-this.Y;
+        if(height/1000>this.Score){
+            this.Score =Math.round(height/1000);
+        }
 
     }
     Collided(colidables: GameObject[]) {
