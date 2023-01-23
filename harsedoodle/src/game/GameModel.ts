@@ -2,7 +2,7 @@ import GameObject from "./GameObject";
 import Platform from "./Platform";
 import Player from "./player";
 import ResourceLoader from "./ResourceLoader";
-import XY from "./XY";
+import Random from "./random";
 class GameModel {
     ResourceLoader:ResourceLoader
     Start:number;
@@ -18,7 +18,7 @@ class GameModel {
     PLAYAREASIZE = 1300;
     XTILECOUNT = 20;
     YTILECOUNT = 20;
-    TILEWIDTH = 128;
+    TILEWIDTH = 193;
     // TILEWIDTH=this.WORLDSIZE/this.VIEWPORTSIZE;
     ViewPortCenter = { x: this.WORLDSIZE / 2, y: this.WORLDSIZE / 2 }
 
@@ -47,7 +47,13 @@ class GameModel {
     Moves = 0;
 
     OtherPlayers = [];
-
+    createRandomPlatforms(){
+        for(let i =0;i<this.Platform_START_COUNT;i++){
+            let x=Random.nextRange(0,this.WORLDSIZE);
+            let y=Random.nextRange(0,this.WORLDSIZE);
+            this.Platforms.push(new Platform(x,y,this))
+        }
+    }
 
     getPlayAreaLimits() {
         let padding = (this.VIEWPORTSIZE - this.PLAYAREASIZE) / 2;
@@ -86,9 +92,7 @@ class GameModel {
         this.Self =new Player(100,new Image(),this.WORLDSIZE,this,this.WORLDSIZE/2,100);
 
         }
-        for(let i =0;i<this.Platform_START_COUNT;i++){
-            this.Platforms.push(new Platform(750*i,750*i,this))
-        }
+        this.createRandomPlatforms()
         
     }
 
@@ -100,7 +104,15 @@ class GameModel {
             this.Grid.push([]);
             for (let j = 0; j < this.YTILECOUNT; j++) {
 
-                this.Grid[i].push(`tile-${count}.jpg`);
+                if(i==0){
+                this.Grid[i].push(`building-1.png`);
+                } else
+                if(i==this.YTILECOUNT-1){
+                this.Grid[i].push(`building-6.png`);
+                } else{
+                this.Grid[i].push(`building-4.png`);
+                }
+
                 count++;
             }
         }
@@ -137,10 +149,10 @@ class GameModel {
     //         );
     //     }
     // }
-    angleBetweenObjects(obj1:XY, obj2:XY) {
+    angleBetweenObjects(obj1:GameObject, obj2:GameObject) {
         return Math.atan2(obj2.Y - obj1.Y, obj2.X - obj1.X);
     }
-    distanceBetweenObjects(obj1:XY, obj2:XY) {
+    distanceBetweenObjects(obj1:GameObject, obj2:GameObject) {
         let x1 = obj1.X;
         let x2 = obj2.X;
         let y1 = obj1.Y;

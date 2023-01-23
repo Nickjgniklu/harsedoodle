@@ -23,7 +23,7 @@ export default class Platform implements GameObject{
     context.translate(x, y);
     context.rotate(this.Rotation);
     context.translate(-x, -y);
-    let playerImg = this.GameModel.ResourceLoader.Images.get("asteroid.png")
+    let playerImg = this.GameModel.ResourceLoader.Images.get("BadCloud.png")
     if(playerImg && playerImg.isReady){
     context.drawImage(playerImg, x - (this.Length / 2), y - (this.Length / 2), this.Length, this.Length);
     }
