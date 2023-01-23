@@ -11,7 +11,7 @@ class GameModel {
   TimeSinceStart: number = 0
   TimeSinceStartSeconds: number | null = null
   Self: Player
-  Score = 0
+  Time = 0
   Paused = false
   WORLDSIZE = 10240 * 2
   VIEWPORTSIZE = 2048
@@ -22,22 +22,12 @@ class GameModel {
   // TILEWIDTH=this.WORLDSIZE/this.VIEWPORTSIZE;
   ViewPortCenter = { x: this.WORLDSIZE / 2, y: this.WORLDSIZE / 2 }
 
-  SHIPSIZE = 200
-
-  ASTEROID_DEFAULT_SIZE = 200
-  ASTEROID_START_COUNT = 100
-  Asteroids = {}
-
   Platform_START_COUNT = 700
   Platforms: Platform[] = []
 
   UFO_DEFAULT_SIZE = 400
   UFO_START_COUNT = 5
   UFOs = {}
-
-  MISSLE_DEFAULT_SIZE = 100
-  Missles = []
-  NewMissles = []
 
   Grid: string[][] = []
 
@@ -105,19 +95,16 @@ class GameModel {
 
   PrepTiles() {
     this.Grid = []
-    let count = 0
     for (let i = 0; i < this.XTILECOUNT; i++) {
       this.Grid.push([])
       for (let j = 0; j < this.YTILECOUNT; j++) {
-        if (i == 0) {
+        if (i === 0) {
           this.Grid[i].push(`building-1.png`)
-        } else if (i == this.YTILECOUNT - 1) {
+        } else if (i === this.YTILECOUNT - 1) {
           this.Grid[i].push(`building-6.png`)
         } else {
           this.Grid[i].push(`building-4.png`)
         }
-
-        count++
       }
     }
   }

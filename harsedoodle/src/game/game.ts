@@ -1,19 +1,6 @@
 import Keyboard from './keyboard'
-//import GameModel from "./gamemodel.js";
 import ResourceLoader, { LoadableImage } from './resource-loader'
-//import HighScores from "./highscores.js";
-//import ControlSetup from "./controlsetup.js";
 import React from 'react'
-//import { Button, TextField } from "@material-ui/core";
-//import PSystemManager from "./PSystemManager";
-//import Physics from "./Physics";
-//import sshot from "../images/screenshot.png";
-//import io from "socket.io-client";
-//import NetworkIds from "../NetworkIds.js";
-//import Queue from "../queue.js";
-//import Missle from "./missle.js";
-//import Asteroid from "./asteroid.js";
-import Player from './player'
 import { Persistence } from './persistance'
 import GameModel from './game-model'
 const e = React.createElement
@@ -50,16 +37,8 @@ class Game extends React.Component {
 
   renderBackground(context: CanvasRenderingContext2D) {
     let left = this.GameModel.ViewPortCenter.x - this.GameModel.VIEWPORTSIZE / 2
-    let right = left + this.GameModel.VIEWPORTSIZE
     let top = this.GameModel.ViewPortCenter.y - this.GameModel.VIEWPORTSIZE / 2
-    let bottom = top + this.GameModel.VIEWPORTSIZE
 
-    // this.GameModel.WORLDSIZE/this.GameModel.TILEWIDTH
-    // let leftTile=(left/this.GameModel.WORLDSIZE)*this.GameModel.XTILECOUNT;
-    // let topTile=(top/this.GameModel.WORLDSIZE)*this.GameModel.YTILECOUNT;
-    // let leftTileIndex=Math.floor((left/this.GameModel.WORLDSIZE)*this.GameModel.XTILECOUNT);
-    // let leftTileStart=((left/this.GameModel.WORLDSIZE)*this.GameModel.XTILECOUNT)-leftTileIndex;
-    // let leftWidthStart=this.GameModel.XTILECOUNT-(((left/this.GameModel.WORLDSIZE)*this.GameModel.XTILECOUNT)-leftTileIndex);
     let Xindex = Math.floor(
       (left / this.GameModel.WORLDSIZE) * this.GameModel.XTILECOUNT
     )
@@ -96,7 +75,7 @@ class Game extends React.Component {
 
     while (currentY < this.GameModel.VIEWPORTSIZE) {
       while (currentX < this.GameModel.VIEWPORTSIZE) {
-        if (minXIndex == Xindex && minYIndex == Yindex) {
+        if (minXIndex === Xindex && minYIndex === Yindex) {
           context.drawImage(
             this.ResourceLoader.Images.get(
               this.GameModel.Grid[Yindex][Xindex]
@@ -111,7 +90,7 @@ class Game extends React.Component {
             YtileWidthViewport
           )
         } else {
-          if (minYIndex == Yindex) {
+          if (minYIndex === Yindex) {
             context.drawImage(
               this.ResourceLoader.Images.get(
                 this.GameModel.Grid[Yindex][Xindex]
@@ -125,7 +104,7 @@ class Game extends React.Component {
               tilesizeinviewport,
               YtileWidthViewport
             )
-          } else if (minXIndex == Xindex) {
+          } else if (minXIndex === Xindex) {
             context.drawImage(
               this.ResourceLoader.Images.get(
                 this.GameModel.Grid[Yindex][Xindex]
@@ -155,7 +134,7 @@ class Game extends React.Component {
             )
           }
         }
-        if (currentX == 0) {
+        if (currentX === 0) {
           currentX += XtileWidthViewport
         } else {
           currentX += tilesizeinviewport
@@ -170,7 +149,7 @@ class Game extends React.Component {
         (left / this.GameModel.WORLDSIZE) * this.GameModel.XTILECOUNT
       )
       currentX = 0
-      if (currentY == 0) {
+      if (currentY === 0) {
         currentY += YtileWidthViewport
       } else {
         currentY += tilesizeinviewport
@@ -201,17 +180,23 @@ class Game extends React.Component {
   // }
 
   renderScores(context: CanvasRenderingContext2D) {
-    let players = this.GameModel.OtherPlayers
     context.font = '70px Arial'
     let loc = 50
     context.fillStyle = '#ff99ff'
-    if(this.GameModel.Self.Score>=20){
-    context.font = '100px Arial'
+    if (this.GameModel.Self.Won) {
+      context.font = '100px Arial'
 
-        context.fillText('Winner!!!!!!', 30, loc+40)
-
-    }else{
-    context.fillText(`score ` + this.GameModel.Self.Score, 30, loc)
+      context.fillText(
+        `Winner!!!!!! time:${this.GameModel.Self.Time}`,
+        30,
+        loc + 40
+      )
+    } else {
+      context.fillText(
+        `score: ${this.GameModel.Self.Score} time:${this.GameModel.Self.Time}`,
+        30,
+        loc
+      )
     }
     context.fillStyle = '#0000FF'
   }
@@ -261,7 +246,7 @@ class Game extends React.Component {
   LastFrameTime = 0
   update(elapsedTime: number) {
     if (this.LastFrameTime != null) {
-      if (this.GameModel.TimeStart == null) {
+      if (this.GameModel.TimeStart === null) {
         this.GameModel.TimeStart = elapsedTime
       } else {
         this.GameModel.TimeSinceStart = elapsedTime - this.GameModel.TimeStart
@@ -364,30 +349,30 @@ class Game extends React.Component {
   //     let i = Math.floor(loc.X / (this.GameModel.COORD_SIZE / this.GameModel.size));
   //     let j = Math.floor(loc.Y / (this.GameModel.COORD_SIZE / this.GameModel.size));
   //     let scale = (this.GameModel.COORD_SIZE / this.GameModel.size);
-  //     if ((this.GameModel.Grid[i] && this.GameModel.Grid[i][j]) == null) {
+  //     if ((this.GameModel.Grid[i] && this.GameModel.Grid[i][j]) === null) {
   //         return;
   //     }
   //     console.log(this.GameModel.Grid);
-  //     if ((this.GameModel.Grid[i + 1] && this.GameModel.Grid[i + 1][j]) === null) {
+  //     if ((this.GameModel.Grid[i + 1] && this.GameModel.Grid[i + 1][j]) ==== null) {
   //         this.beginMoveTile(this.GameModel.Grid[i][j], { X: i * scale, Y: j * scale }, { X: (i + 1) * scale, Y: j * scale }, this.GameModel.Grid[i + 1][j]);
   //         this.GameModel.Grid[i][j] = null;
   //         this.GameModel.Moves++;
 
   //     } else
-  //         if ((this.GameModel.Grid[i - 1] && this.GameModel.Grid[i - 1][j]) === null) {
+  //         if ((this.GameModel.Grid[i - 1] && this.GameModel.Grid[i - 1][j]) ==== null) {
   //             this.beginMoveTile(this.GameModel.Grid[i][j], { X: i * scale, Y: j * scale }, { X: (i - 1) * scale, Y: j * scale }, this.GameModel.Grid[i - 1][j]);
   //             this.GameModel.Grid[i][j] = null;
   //             this.GameModel.Moves++;
 
   //         } else
-  //             if ((this.GameModel.Grid[i][j + 1]) === null) {
+  //             if ((this.GameModel.Grid[i][j + 1]) ==== null) {
   //                 this.beginMoveTile(this.GameModel.Grid[i][j], { X: i * scale, Y: j * scale }, { X: (i) * scale, Y: (j + 1) * scale }, this.GameModel.Grid[i][j + 1]);
 
   //                 this.GameModel.Grid[i][j] = null;
   //                 this.GameModel.Moves++;
 
   //             } else
-  //                 if ((this.GameModel.Grid[i][j - 1]) === null) {
+  //                 if ((this.GameModel.Grid[i][j - 1]) ==== null) {
 
   //                     let start = { X: i * scale, Y: j * scale };
   //                     let end = { X: (i) * scale, Y: (j - 1) * scale }
@@ -404,9 +389,6 @@ class Game extends React.Component {
     this.LastFrameTime = 0
     //this.Counting = false;
     console.log('starting')
-
-    let serverModel = {}
-
     this.GameModel = new GameModel(this.ResourceLoader)
     console.log(this.GameModel)
 
