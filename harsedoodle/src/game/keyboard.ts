@@ -9,26 +9,26 @@ class Keyboard {
     let that = this
     window.addEventListener('keydown', function (event: KeyboardEvent) {
       that.InputBuffer.set(event.key, event.key)
-      if (that.ControlMap.jump === event.key) {
+      if (that.ControlMap.jump.includes(event.key)) {
         that.CommandBuffer.set('jump', true)
       }
-      if (that.ControlMap.left === event.key) {
+      if (that.ControlMap.left.includes(event.key) ) {
         that.CommandBuffer.set('left', true)
       }
-      if (that.ControlMap.right === event.key) {
+      if (that.ControlMap.right.includes(event.key) ) {
         that.CommandBuffer.set('right', true)
       }
     })
 
     window.addEventListener('keyup', function (event: KeyboardEvent) {
       that.InputBuffer.set(event.key, event.key)
-      if (that.ControlMap.jump === event.key) {
+      if (that.ControlMap.jump.includes(event.key) ) {
         that.CommandBuffer.set('jump', false)
       }
-      if (that.ControlMap.left === event.key) {
+      if (that.ControlMap.left.includes(event.key) ) {
         that.CommandBuffer.set('left', false)
       }
-      if (that.ControlMap.right === event.key) {
+      if (that.ControlMap.right.includes(event.key) ) {
         that.CommandBuffer.set('right', false)
       }
     })

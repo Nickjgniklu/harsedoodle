@@ -4,9 +4,9 @@
 //
 // ------------------------------------------------------------------
 export class ControlMap {
-  left = 'ArrowLeft'
-  right = 'ArrowRight'
-  jump = ' '
+  left = ['ArrowLeft','a']
+  right = ['ArrowRight','d']
+  jump = [' ']
 }
 export class Persistence {
   private prefix = 'Nykloo.'
