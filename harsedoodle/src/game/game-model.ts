@@ -22,7 +22,7 @@ class GameModel {
   // TILEWIDTH=this.WORLDSIZE/this.VIEWPORTSIZE;
   ViewPortCenter = { x: this.WORLDSIZE / 2, y: this.WORLDSIZE / 2 }
 
-  Platform_START_COUNT = 700
+  Platform_START_COUNT = 500
   Platforms: Platform[] = []
 
   UFO_DEFAULT_SIZE = 400
