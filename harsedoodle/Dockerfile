@@ -1,14 +1,15 @@
 FROM node:18.13 as build 
-
+LABEL org.opencontainers.image.source="https://github.com/nickjgniklu/harsedoodle"
 
 WORKDIR /react-app
 
 
-COPY package*.json .
+COPY package*.json ./
 
 
 RUN npm install
 
+EXPOSE 80
 
 COPY . .
 
